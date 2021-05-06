@@ -151,3 +151,40 @@ func canPlaceFlowers(_ flowerbed: [Int], _ n: Int) -> Bool {
 
 //print(canPlaceFlowers([1, 0, 0, 0, 1, 0, 0], 2))
 
+//452
+func findMinArrowShots(_ points: [[Int]]) -> Int {
+    guard points.count > 0 else {
+        return 0
+    }
+    
+    var points = points
+    
+    points.sort { a, b -> Bool in
+        return b[0] >= a[0]
+    }
+    
+    var num = 1
+    var pre = points[0]
+    
+    for i in 1..<points.count {
+        if points[i][0] <= pre[1] {
+            pre[0] = points[i][0]
+            pre[1] = min(pre[1], points[i][1])
+        } else {
+            num += 1
+            pre = points[i]
+        }
+    }
+    
+    return num
+}
+
+print(findMinArrowShots([[1,2],[2,3],[3,4],[4,5]]))
+
+//763
+
+//122
+
+//406
+
+//665

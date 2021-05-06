@@ -4,4 +4,14 @@ import Foundation
 
 var str = "二分查找"
 
-//: [Next](@next)
+//69
+
+//34
+
+//81
+
+//154
+
+//540
+
+//4

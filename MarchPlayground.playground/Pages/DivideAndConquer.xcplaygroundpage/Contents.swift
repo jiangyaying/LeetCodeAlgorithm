@@ -2,6 +2,6 @@
 
 import Foundation
 
-var str = "Hello, playground"
+var str = "分治算法"
 
 //: [Next](@next)

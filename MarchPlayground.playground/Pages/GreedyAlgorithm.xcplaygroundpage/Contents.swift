@@ -179,12 +179,109 @@ func findMinArrowShots(_ points: [[Int]]) -> Int {
     return num
 }
 
-print(findMinArrowShots([[1,2],[2,3],[3,4],[4,5]]))
+//print(findMinArrowShots([[1,2],[2,3],[3,4],[4,5]]))
 
 //763
+func partitionLabels(_ S: String) -> [Int] {
+    guard S.count > 0 else {
+        return []
+    }
+    
+    var res = [Int]()
+    let chars = Array(S)
+    var map = [Character: Int]()
+    
+    var start = 0
+    var end = 0
+    for i in 0..<chars.count {
+        map[chars[i]] = i
+    }
+    
+    print(map)
+    
+    for i in 0..<chars.count {
+        if let loc = map[chars[i]] {
+            end = max(end, loc)
+        }
+        
+        if i == end {
+            res.append(end - start + 1)
+            start = end + 1
+        }
+    }
+    return res
+}
 
+//print(partitionLabels("ababcbacadefegdehijhklij"))
 //122
-
+func maxProfit(_ prices: [Int]) -> Int {
+    guard  prices.count >= 1, prices.count <= 3 * 10000 else {
+        return 0
+    }
+    
+    var result = 0
+    for i in 1..<prices.count {
+        let learn = prices[i] - prices[i - 1]
+        if learn > 0 {
+            result += learn
+        }
+    }
+    return result
+}
 //406
+func reconstructQueue(_ people: [[Int]]) -> [[Int]] {
+    guard people.count > 0 else {
+        return [[]]
+    }
+    
+    var queue = [[Int]]()
+    
+    let people = people.sorted { h1, h2 -> Bool in
+        if h1[0] == h2[0] {
+            return h1[1] < h2[1]
+        }
+        
+        return h1[0] >= h2 [0]
+    }
+    
+    print(people)
+    
+    for i in 0..<people.count {
+        let index = people[i][1]
+        queue.insert(people[i], at: index)
+        print(queue)
+    }
+    
+    return queue
+}
 
+//print(reconstructQueue([[6,0],[5,0],[4,0],[3,2],[2,2],[1,4]]))
 //665
+func checkPossibility(_ nums: [Int]) -> Bool {
+    guard nums.count > 1 else {
+        return false
+    }
+    
+    var deleteItem = 0
+    var nums = nums
+    for i in 0..<nums.count - 1 {
+        if nums[i] > nums[i + 1] {
+            if i == 0 {
+                nums[i] = nums[i + 1]
+            } else {
+                // a b c , a>c c=b, a<c
+                if nums[i - 1] > nums[i + 1] {
+                    nums[i + 1] = nums[i]
+                } else {
+                    nums[i] = nums[i + 1]
+                }
+            }
+            deleteItem += 1
+        }
+        print(nums[i])
+    }
+    
+    return deleteItem <= 1
+}
+
+//print(checkPossibility([2,4,3,5,3]))
